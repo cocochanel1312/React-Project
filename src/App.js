@@ -24,7 +24,7 @@ function App() {
             <PizzaBlock title="Острый Мексиканец" price="5.99"/>
             <PizzaBlock title="Омичка" price="9.99"/>
             <PizzaBlock title="Крабово-креветочная" price="13.99"/>
-            <PizzaBlock title="Торпедуха" price="8.99"/>
+            <PizzaBlock title="Торпедуха" price="9.99"/>
             <PizzaBlock title="Мясная" price="7.99"/>
           </div>
         </div>
