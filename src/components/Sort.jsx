@@ -3,11 +3,11 @@ import React, { useState } from "react";
 function Sort() {
   const [openPopup, setOpenPopup] = useState(false);
 
-  const [activeList, setActiveList] = useState(0);
+  const [activeListIndex, setActiveListIndex] = useState(0);
   const popUpList = ["популярности", "цене", "алфавиту"];
 
   const onClickListItem = (listIndex) => {
-    setActiveList(listIndex);
+    setActiveListIndex(listIndex);
     setOpenPopup(false);
   };
 
@@ -27,7 +27,9 @@ function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpenPopup(!openPopup)}>{popUpList[activeList]}</span>
+        <span onClick={() => setOpenPopup(!openPopup)}>
+          {popUpList[activeListIndex]}
+        </span>
       </div>
       {openPopup && (
         <div className="sort__popup">
@@ -36,7 +38,7 @@ function Sort() {
               <li
                 key={listIndex}
                 onClick={() => onClickListItem(listIndex)}
-                className={activeList === listIndex ? "active" : ""}
+                className={activeListIndex === listIndex ? "active" : ""}
               >
                 {nameList}
               </li>
