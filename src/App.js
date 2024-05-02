@@ -17,7 +17,7 @@ function App() {
       })
       .then((pizzaArray) => {
         setPizzaItems(pizzaArray);
-        setIsLoading(false)
+        setIsLoading(false);
       });
   }, []);
 
@@ -27,7 +27,7 @@ function App() {
       <div className="content">
         <div className="container">
           <div className="content__top">
-            {<Categories />}
+            <Categories />
             <Sort />
           </div>
           <h2 className="content__title">Все пиццы</h2>
@@ -35,11 +35,7 @@ function App() {
             {isLoading
               ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
               : pizzaItems.map((object) => (
-                  <PizzaBlock
-                    key={object.id}
-                    {...object}
-                    image={object.imageUrl}
-                  />
+                  <PizzaBlock key={object.id} {...object} />
                 ))}
           </div>
         </div>
