@@ -9,6 +9,8 @@ function Home() {
   // TODO: поменять способ задания функции
   const [pizzaItems, setPizzaItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [categoryId, setCategoryId] = useState(0);
+  const [sort, setSort] = useState(0);
 
   useEffect(() => {
     fetch("https://6630dd5dc92f351c03db6116.mockapi.io/items")
@@ -25,7 +27,10 @@ function Home() {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories />
+        <Categories
+          categoryId={categoryId}
+          onClickCategory={(categoryIndex) => setCategoryId(categoryIndex)}
+        />
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
