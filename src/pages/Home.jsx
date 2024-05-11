@@ -4,6 +4,7 @@ import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
+import Pagination from "../components/Pagination";
 
 function Home({ searchValue }) {
   // TODO: поменять способ задания функции
@@ -54,6 +55,7 @@ function Home({ searchValue }) {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeletons : pizzas}</div>
+      <Pagination />
     </div>
   );
 }
