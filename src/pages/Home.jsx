@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useMemo } from "react";
 
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
@@ -6,8 +6,12 @@ import PizzaBlock from "../components/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import Pagination from "../components/Pagination";
 
-function Home({ searchValue }) {
-  // TODO: поменять способ задания функции
+import { SearchContext } from "../App";
+import { useNavigate } from "react-router-dom";
+
+function Home() {
+  const navigate = useNavigate();
+  const { searchValue } = useContext(SearchContext);
   const [pizzaItems, setPizzaItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
@@ -38,9 +42,16 @@ function Home({ searchValue }) {
     <Skeleton key={index} />
   ));
 
-  const pizzas = pizzaItems.map((object) => (
-    <PizzaBlock key={object.id} {...object} />
-  ));
+  const pizzas = useMemo(() => {
+    if (Array.isArray(pizzaItems)) {
+      return pizzaItems.map((object) => (
+        <PizzaBlock key={object.id} {...object} />
+      ));
+    }
+  }, [pizzaItems]);
+  // const pizzas = pizzaItems.map((object) => (
+  //   <PizzaBlock key={object.id} {...object} />
+  // ));
 
   return (
     <div className="container">
