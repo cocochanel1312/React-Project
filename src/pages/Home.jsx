@@ -7,10 +7,8 @@ import Skeleton from "../components/PizzaBlock/Skeleton";
 import Pagination from "../components/Pagination";
 
 import { SearchContext } from "../App";
-import { useNavigate } from "react-router-dom";
 
 function Home() {
-  const navigate = useNavigate();
   const { searchValue } = useContext(SearchContext);
   const [pizzaItems, setPizzaItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
