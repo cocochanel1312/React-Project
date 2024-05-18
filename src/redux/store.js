@@ -7,5 +7,3 @@ export const store = configureStore({
     filter,
   },
 });
-
-
