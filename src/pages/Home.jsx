@@ -7,14 +7,14 @@ import PizzaBlock from "../components/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import Pagination from "../components/Pagination";
 
-import { setCategoryId, setSortType } from "../redux/slices/filterSlice";
+import { setCategoryId } from "../redux/slices/filterSlice";
 
 import { SearchContext } from "../App";
 
 function Home() {
+  const dispatch = useDispatch();
   const categoryId = useSelector((state) => state.filter.categoryId);
   const sortType = useSelector((state) => state.filter.sort);
-  const dispatch = useDispatch();
 
   const { searchValue } = useContext(SearchContext);
   const [pizzaItems, setPizzaItems] = useState([]);
@@ -23,10 +23,6 @@ function Home() {
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
-  };
-
-  const onChangeSort = (name) => {
-    dispatch(setSortType(name));
   };
 
   useEffect(() => {
@@ -65,7 +61,7 @@ function Home() {
     <div className="container">
       <div className="content__top">
         <Categories valueId={categoryId} onChangeCategory={onChangeCategory} />
-        <Sort sortValue={sortType} onChangeSort={onChangeSort} />
+        <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeletons : pizzas}</div>
