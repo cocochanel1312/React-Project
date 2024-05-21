@@ -1,22 +1,29 @@
-import React, { useState, useEffect, useContext, useMemo } from "react";
+import React, { useState, useEffect, useContext, useMemo, useRef } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import QueryString from "qs";
 import { useNavigate } from "react-router-dom";
 
 import Categories from "../components/Categories";
-import Sort from "../components/Sort";
+import Sort, { popUpList } from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import Pagination from "../components/Pagination";
 
-import { setCategoryId, setCurrentPage } from "../redux/slices/filterSlice";
+import {
+  setCategoryId,
+  setCurrentPage,
+  setFilters,
+} from "../redux/slices/filterSlice";
 
 import { SearchContext } from "../App";
 
 function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isSearch = useRef(false);
+  const isMounted = useRef(false);
+
   const categoryId = useSelector((state) => state.filter.categoryId);
   const sortType = useSelector((state) => state.filter.sort);
   const currentPage = useSelector((state) => state.filter.currentPage);
@@ -33,7 +40,7 @@ function Home() {
     dispatch(setCurrentPage(number));
   };
 
-  useEffect(() => {
+  const fetchPizzas = () => {
     setIsLoading(true);
     const category = categoryId ? `category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
@@ -46,18 +53,43 @@ function Home() {
         setPizzaItems(res.data);
         setIsLoading(false);
       });
-
-    window.scrollTo(0, 0);
-  }, [categoryId, sortType, searchValue, currentPage]);
+  };
 
   useEffect(() => {
-    const queryString = QueryString.stringify({
-      sortProperty: sortType.sortProperty,
-      categoryId,
-      currentPage,
-    });
+    if (isMounted.current) {
+      const queryString = QueryString.stringify({
+        sortProperty: sortType.sortProperty,
+        categoryId,
+        currentPage,
+      });
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
+  }, [categoryId, sortType, currentPage]);
 
-    navigate(`?${queryString}`);
+  useEffect(() => {
+    if (window.location.search) {
+      const params = QueryString.parse(window.location.search.substring(1));
+      const sort = popUpList.find(
+        (obj) => obj.sortProperty === params.sortProperty
+      );
+      dispatch(
+        setFilters({
+          ...params,
+          sort,
+        })
+      );
+      isSearch.current = true;
+    }
+  }, []);
+
+  useEffect(() => {
+    window.scroll(0, 0);
+
+    if (!isSearch.current) {
+      fetchPizzas();
+    }
+    isSearch.current = false;
   }, [categoryId, sortType, searchValue, currentPage]);
 
   const skeletons = [...new Array(4)].map((_, index) => (
