@@ -54,19 +54,7 @@ function Home() {
         setIsLoading(false);
       });
   };
-
-  useEffect(() => {
-    if (isMounted.current) {
-      const queryString = QueryString.stringify({
-        sortProperty: sortType.sortProperty,
-        categoryId,
-        currentPage,
-      });
-      navigate(`?${queryString}`);
-    }
-    isMounted.current = true;
-  }, [categoryId, sortType, currentPage]);
-
+  
   useEffect(() => {
     if (window.location.search) {
       const params = QueryString.parse(window.location.search.substring(1));
@@ -82,6 +70,19 @@ function Home() {
       isSearch.current = true;
     }
   }, []);
+
+  useEffect(() => {
+    if (isMounted.current) {
+      const queryString = QueryString.stringify({
+        sortProperty: sortType.sortProperty,
+        categoryId,
+        currentPage,
+      });
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
+  }, [categoryId, sortType, currentPage]);
+
 
   useEffect(() => {
     window.scroll(0, 0);
