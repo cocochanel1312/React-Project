@@ -54,7 +54,7 @@ function Home() {
         setIsLoading(false);
       });
   };
-  
+
   useEffect(() => {
     if (window.location.search) {
       const params = QueryString.parse(window.location.search.substring(1));
@@ -82,7 +82,6 @@ function Home() {
     }
     isMounted.current = true;
   }, [categoryId, sortType, currentPage]);
-
 
   useEffect(() => {
     window.scroll(0, 0);

@@ -22,8 +22,7 @@ function Sort() {
 
   useEffect(() => {
     const clickOutside = (event) => {
-      if (event.composedPath().includes(sortRef.current)) {
-        console.log("click snaruzhi");
+      if (!event.composedPath().includes(sortRef.current)) {
         setOpenPopup(false);
       }
     };
