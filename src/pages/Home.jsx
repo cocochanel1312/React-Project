@@ -52,6 +52,10 @@ function Home() {
       .then((res) => {
         setPizzaItems(res.data);
         setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(true);
+        alert("Введите правильное название пиццы");
       });
   };
 
