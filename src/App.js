@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "./scss/app.scss";
 
-
 import { Route, Routes } from "react-router-dom";
 
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Cart from "./pages/Cart";
+import Favorites from "./pages/Favorites";
 
 export const SearchContext = React.createContext();
 
@@ -23,6 +23,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/favorites" element={<Favorites />} />
           </Routes>
         </div>
       </SearchContext.Provider>

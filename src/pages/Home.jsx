@@ -40,23 +40,21 @@ function Home() {
     dispatch(setCurrentPage(number));
   };
 
-  const fetchPizzas = () => {
+  const fetchPizzas = async () => {
     setIsLoading(true);
     const category = categoryId ? `category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
 
-    axios
-      .get(
+    try {
+      const res = await axios.get(
         `https://6630dd5dc92f351c03db6116.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortType.sortProperty}&order=desc${search}`
-      )
-      .then((res) => {
-        setPizzaItems(res.data);
-        setIsLoading(false);
-      })
-      .catch(() => {
-        setIsLoading(true);
-        alert("Введите правильное название пиццы");
-      });
+      );
+      setPizzaItems(res.data);
+      setIsLoading(false);
+    } catch {
+      setIsLoading(true);
+      alert("Введите правильное название пиццы");
+    }
   };
 
   useEffect(() => {

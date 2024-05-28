@@ -29,8 +29,8 @@ function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
       title,
       price,
       imageUrl,
-      type: typeNames[activeTypeName],
-      size: activeSize,
+      types: typeNames[activeTypeName], // Спросить у Стаса, почему он этот пропс берет, а не с бэка
+      size: sizes[activeSize],
     };
     dispatch(addItem(item));
   };
