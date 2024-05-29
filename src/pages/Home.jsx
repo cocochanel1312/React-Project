@@ -16,6 +16,8 @@ import {
   setFilters,
 } from "../redux/slices/filterSlice";
 
+import { setItems } from "../redux/slices/pizzasSlice";
+
 import { SearchContext } from "../App";
 
 function Home() {
@@ -28,8 +30,9 @@ function Home() {
   const sortType = useSelector((state) => state.filter.sort);
   const currentPage = useSelector((state) => state.filter.currentPage);
 
+  const pizzaItems = useSelector((state) => state.pizzas.items);
+
   const { searchValue } = useContext(SearchContext);
-  const [pizzaItems, setPizzaItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const onChangeCategory = (id) => {
@@ -42,14 +45,14 @@ function Home() {
 
   const fetchPizzas = async () => {
     setIsLoading(true);
-    const category = categoryId ? `category=${categoryId}` : "";
+    const category = categoryId ? `&category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
 
     try {
       const res = await axios.get(
-        `https://6630dd5dc92f351c03db6116.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortType.sortProperty}&order=desc${search}`
+        `https://6630dd5dc92f351c03db6116.mockapi.io/items?page=${currentPage}&limit=4${category}&sortBy=${sortType.sortProperty}&order=desc${search}`
       );
-      setPizzaItems(res.data);
+      dispatch(setItems(res.data));
       setIsLoading(false);
     } catch {
       setIsLoading(true);
