@@ -13,11 +13,17 @@ import {
   setCategoryId,
   setCurrentPage,
   setFilters,
+  sortSelector,
+  categoryIdSelector,
+  currentPageSelector,
+  searchValueSelector,
 } from "../redux/slices/filterSlice";
 
-import { fetchPizzas } from "../redux/slices/pizzasSlice";
-
-import { SearchContext } from "../App";
+import {
+  fetchPizzas,
+  pizzaItemsSelector,
+  pizzaStatusSelector,
+} from "../redux/slices/pizzasSlice";
 
 function Home() {
   const navigate = useNavigate();
@@ -25,14 +31,13 @@ function Home() {
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const categoryId = useSelector((state) => state.filter.categoryId);
-  const sortType = useSelector((state) => state.filter.sort);
-  const currentPage = useSelector((state) => state.filter.currentPage);
+  const categoryId = useSelector(categoryIdSelector);
+  const sortType = useSelector(sortSelector);
+  const currentPage = useSelector(currentPageSelector);
+  const searchValue = useSelector(searchValueSelector);
 
-  const pizzaItems = useSelector((state) => state.pizzas.items);
-  const pizzaStatus = useSelector((state) => state.pizzas.status);
-
-  const { searchValue } = useContext(SearchContext);
+  const pizzaItems = useSelector(pizzaItemsSelector);
+  const pizzaStatus = useSelector(pizzaStatusSelector);
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
