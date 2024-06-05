@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import debounce from "lodash.debounce";
 import styles from "./Search.module.scss";
 import { FaSearch } from "react-icons/fa";
@@ -6,10 +6,10 @@ import { IoCloseOutline } from "react-icons/io5";
 import { setSearchValue } from "../../redux/slices/filterSlice";
 import { useDispatch } from "react-redux";
 
-function Search() {
+const Search: React.FC = () => {
   const dispatch = useDispatch();
-  const [value, setValue] = useState("");
-  const inputRef = useRef();
+  const [value, setValue] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const onClickClear = () => {
     dispatch(setSearchValue(""));
@@ -44,6 +44,6 @@ function Search() {
       )}
     </div>
   );
-}
+};
 
 export default Search;

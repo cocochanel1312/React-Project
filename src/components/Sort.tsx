@@ -3,25 +3,30 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { setSort, sortSelector } from "../redux/slices/filterSlice";
 
-export const popUpList = [
+interface ISortList {
+  name: string;
+  sortProperty: string;
+}
+
+export const sortList: ISortList[] = [
   { name: "популярности", sortProperty: "rating" },
   { name: "цене", sortProperty: "price" },
   { name: "алфавиту", sortProperty: "title" },
 ];
-function Sort() {
+const Sort: React.FC = () => {
   const dispatch = useDispatch();
   const sort = useSelector(sortSelector);
-  const sortRef = useRef();
+  const sortRef = useRef<HTMLDivElement>(null);
 
-  const [openPopup, setOpenPopup] = useState(false);
+  const [openPopup, setOpenPopup] = useState<boolean>(false);
 
-  const onClickListItem = (obj) => {
+  const onClickListItem = (obj: ISortList) => {
     dispatch(setSort(obj));
     setOpenPopup(false);
   };
 
   useEffect(() => {
-    const clickOutside = (event) => {
+    const clickOutside = (event: any) => {
       if (!event.composedPath().includes(sortRef.current)) {
         setOpenPopup(false);
       }
@@ -55,7 +60,7 @@ function Sort() {
       {openPopup && (
         <div className="sort__popup">
           <ul>
-            {popUpList.map((obj, listIndex) => (
+            {sortList.map((obj, listIndex) => (
               <li
                 key={listIndex}
                 onClick={() => onClickListItem(obj)}
@@ -71,6 +76,6 @@ function Sort() {
       )}
     </div>
   );
-}
+};
 
 export default Sort;

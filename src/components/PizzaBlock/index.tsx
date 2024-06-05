@@ -3,11 +3,27 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { addItem, cartItemByIdSelector } from "../../redux/slices/cartSlice";
 
+interface IPizzaBlockProps {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  sizes: number[];
+  types: number[];
+}
+
 const typeNames = ["тонкое", "традиционное"];
 
-function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
-  const [activeSize, setActiveSize] = useState(0);
-  const [activeTypeName, setActiveTypeName] = useState(0);
+const PizzaBlock: React.FC<IPizzaBlockProps> = ({
+  id,
+  title,
+  price,
+  imageUrl,
+  sizes,
+  types,
+}) => {
+  const [activeSize, setActiveSize] = useState<number>(0);
+  const [activeTypeName, setActiveTypeName] = useState<number>(0);
   const dispatch = useDispatch();
   const cartItem = useSelector(cartItemByIdSelector(id));
 
@@ -87,6 +103,6 @@ function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
       </div>
     </div>
   );
-}
+};
 
 export default PizzaBlock;

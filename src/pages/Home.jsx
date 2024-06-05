@@ -4,7 +4,7 @@ import QueryString from "qs";
 import { useNavigate } from "react-router-dom";
 
 import Categories from "../components/Categories";
-import Sort, { popUpList } from "../components/Sort";
+import Sort, { sortList } from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import Pagination from "../components/Pagination";
@@ -63,7 +63,7 @@ function Home() {
   useEffect(() => {
     if (window.location.search) {
       const params = QueryString.parse(window.location.search.substring(1));
-      const sort = popUpList.find(
+      const sort = sortList.find(
         (obj) => obj.sortProperty === params.sortProperty
       );
       dispatch(
