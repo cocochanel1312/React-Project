@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 interface IPizza {
   imageUrl: string;
   title: string;
-  price: string;
+  price: number;
 }
 
 const FullPizza: React.FC = () => {
@@ -36,7 +36,7 @@ const FullPizza: React.FC = () => {
     <div className="container">
       <img src={pizza.imageUrl} alt={"PizzaPicture"} />
       <h2>{pizza.title}</h2>
-      <h4>{pizza.price}</h4>
+      <h4>{pizza.price} ₽</h4>
     </div>
   );
 };
