@@ -1,16 +1,16 @@
 import React from "react";
 import { FaHeart } from "react-icons/fa";
 
-function Favorites() {
+const Favorites: React.FC = () => {
   return (
     <div className="container container--cart">
-      <div class="cart">
-        <div class="cart__top">
-          <h2 class="content__title">
+      <div className="cart">
+        <div className="cart__top">
+          <h2 className="content__title">
             <FaHeart />
             Избранное
           </h2>
-          <div class="cart__clear">
+          <div className="cart__clear">
             <svg
               width="20"
               height="20"
@@ -51,20 +51,20 @@ function Favorites() {
             <span>Очистить избранное</span>
           </div>
         </div>
-        <div class="content__items">
+        <div className="content__items">
           {/* {items.map((item) => (
             <CartItem key={item.id} {...item} />
           ))} */}
         </div>
-        <div class="cart__bottom">
-          <div class="cart__bottom-details">
+        <div className="cart__bottom">
+          <div className="cart__bottom-details">
             <span>
               {" "}
               Всего избранных пицц: <b>1222</b>{" "}
             </span>
           </div>
-          <div class="cart__bottom-buttons">
-            <div class="button button--outline button--add go-back-btn">
+          <div className="cart__bottom-buttons">
+            <div className="button button--outline button--add go-back-btn">
               <svg
                 width="8"
                 height="14"
@@ -82,7 +82,7 @@ function Favorites() {
               </svg>
               <span>Вернуться назад</span>
             </div>
-            <div class="button pay-btn">
+            <div className="button pay-btn">
               <span>Сделать заказ избранного</span>
             </div>
           </div>
@@ -90,6 +90,6 @@ function Favorites() {
       </div>
     </div>
   );
-}
+};
 
 export default Favorites;

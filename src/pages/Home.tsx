@@ -25,7 +25,7 @@ import {
   pizzaStatusSelector,
 } from "../redux/slices/pizzasSlice";
 
-function Home() {
+const Home: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isSearch = useRef(false);
@@ -39,11 +39,11 @@ function Home() {
   const pizzaItems = useSelector(pizzaItemsSelector);
   const pizzaStatus = useSelector(pizzaStatusSelector);
 
-  const onChangeCategory = (id) => {
+  const onChangeCategory = (id: number) => {
     dispatch(setCategoryId(id));
   };
 
-  const onChangePage = (number) => {
+  const onChangePage = (number: number) => {
     dispatch(setCurrentPage(number));
   };
 
@@ -51,6 +51,7 @@ function Home() {
     const category = categoryId ? `&category=${categoryId}` : " ";
     const search = searchValue ? `&search=${searchValue}` : " ";
     dispatch(
+      // @ts-ignore
       fetchPizzas({
         category,
         search,
@@ -103,7 +104,7 @@ function Home() {
 
   const pizzas = useMemo(() => {
     if (Array.isArray(pizzaItems)) {
-      return pizzaItems.map((object) => (
+      return pizzaItems.map((object: any) => (
         <PizzaBlock key={object.id} {...object} />
       ));
     }
@@ -125,6 +126,6 @@ function Home() {
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );
-}
+};
 
 export default Home;
