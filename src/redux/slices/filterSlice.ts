@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
-interface IInitialStateFilterSlice {
+interface InitialStateFilterSlice {
   searchValue: string;
   categoryId: number;
   currentPage: number;
@@ -11,7 +11,7 @@ interface IInitialStateFilterSlice {
   };
 }
 
-const initialState: IInitialStateFilterSlice = {
+const initialState: InitialStateFilterSlice = {
   searchValue: "",
   categoryId: 0,
   currentPage: 1,

@@ -8,7 +8,7 @@ interface ICartItemProps {
   price: number;
   imageUrl: string;
   size: number;
-  types: number;
+  types: string;
   count: number;
 }
 

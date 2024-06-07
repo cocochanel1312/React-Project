@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addItem, cartItemByIdSelector } from "../../redux/slices/cartSlice";
+import {
+  addItem,
+  cartItemByIdSelector,
+  ICartItem,
+} from "../../redux/slices/cartSlice";
 
 interface IPizzaBlockProps {
   id: string;
@@ -38,13 +42,14 @@ const PizzaBlock: React.FC<IPizzaBlockProps> = ({
   };
 
   const onClickAdd = () => {
-    const item = {
+    const item: ICartItem = {
       id,
       title,
       price,
       imageUrl,
       types: typeNames[activeTypeName],
       size: sizes[activeSize],
+      count: 0,
     };
     dispatch(addItem(item));
   };
