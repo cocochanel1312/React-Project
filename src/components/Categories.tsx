@@ -2,19 +2,21 @@ import React from "react";
 
 interface ICategoriesProps {
   valueId: number;
-  onChangeCategory: any;
+  onChangeCategory: (id: number) => void;
 }
+const categories = [
+  "Все",
+  "Мясные",
+  "Вегетарианская",
+  "Гриль",
+  "Острые",
+  "Закрытые",
+];
 
-const Categories: React.FC<ICategoriesProps> = ({ valueId, onChangeCategory }) => {
-  const categories = [
-    "Все",
-    "Мясные",
-    "Вегетарианская",
-    "Гриль",
-    "Острые",
-    "Закрытые",
-  ];
-
+const Categories: React.FC<ICategoriesProps> = ({
+  valueId,
+  onChangeCategory,
+}) => {
   return (
     <div className="categories">
       <ul>

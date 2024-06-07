@@ -11,10 +11,11 @@ const Search: React.FC = () => {
   const [value, setValue] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const onClickClear = () => {
+  const onClickClear = (event: React.MouseEvent<SVGElement>) => {
     dispatch(setSearchValue(""));
     setValue("");
     inputRef.current.focus();
+    console.log(event);
   };
 
   const updateSearchValue = useCallback(
@@ -24,7 +25,7 @@ const Search: React.FC = () => {
     []
   );
 
-  const onChangeInput = (event) => {
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
     updateSearchValue(event.target.value);
   };

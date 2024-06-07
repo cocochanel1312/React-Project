@@ -43,7 +43,7 @@ const PizzaBlock: React.FC<IPizzaBlockProps> = ({
       title,
       price,
       imageUrl,
-      types: typeNames[activeTypeName], // Спросить у Стаса, почему он этот пропс берет, а не с бэка
+      types: typeNames[activeTypeName],
       size: sizes[activeSize],
     };
     dispatch(addItem(item));

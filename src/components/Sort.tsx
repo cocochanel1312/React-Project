@@ -26,8 +26,9 @@ const Sort: React.FC = () => {
   };
 
   useEffect(() => {
-    const clickOutside = (event: any) => {
-      if (!event.composedPath().includes(sortRef.current)) {
+    const clickOutside = (event: MouseEvent) => {
+      if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
+        // sortRef.current вначале, делает проверку на null
         setOpenPopup(false);
       }
     };
