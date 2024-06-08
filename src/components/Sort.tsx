@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { setSort, sortSelector } from "../redux/slices/filterSlice";
 
-interface ISortList {
+export interface ISortList {
   name: string;
   sortProperty: string;
 }

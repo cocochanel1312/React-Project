@@ -71,6 +71,9 @@ const Home: React.FC = () => {
         setFilters({
           ...params,
           sort,
+          searchValue: "",
+          categoryId: 0,
+          currentPage: 1,
         })
       );
       isSearch.current = true;
@@ -116,10 +119,7 @@ const Home: React.FC = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories
-          valueId={categoryId}
-          onChangeCategory={onChangeCategory}
-        />
+        <Categories valueId={categoryId} onChangeCategory={onChangeCategory} />
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
