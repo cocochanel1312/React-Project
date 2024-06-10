@@ -1,5 +1,5 @@
-import React, { useEffect, useContext, useMemo, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useMemo, useRef } from "react";
+import { useSelector } from "react-redux";
 import QueryString from "qs";
 import { useNavigate } from "react-router-dom";
 
@@ -24,10 +24,11 @@ import {
   pizzaItemsSelector,
   pizzaStatusSelector,
 } from "../redux/slices/pizzasSlice";
+import { useAppDispatch } from "../redux/store";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
@@ -51,7 +52,6 @@ const Home: React.FC = () => {
     const category = categoryId ? `&category=${categoryId}` : " ";
     const search = searchValue ? `&search=${searchValue}` : " ";
     dispatch(
-      // @ts-ignore
       fetchPizzas({
         category,
         search,
