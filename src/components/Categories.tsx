@@ -1,4 +1,5 @@
 import React from "react";
+import useWhyDidYouUpdate from "ahooks/lib/useWhyDidYouUpdate";
 
 interface ICategoriesProps {
   valueId: number;
@@ -13,25 +14,26 @@ const categories = [
   "Закрытые",
 ];
 
-const Categories: React.FC<ICategoriesProps> = ({
-  valueId,
-  onChangeCategory,
-}) => {
-  return (
-    <div className="categories">
-      <ul>
-        {categories.map((categoryName, categoryIndex) => (
-          <li
-            key={categoryIndex}
-            onClick={() => onChangeCategory(categoryIndex)}
-            className={valueId === categoryIndex ? "active" : ""}
-          >
-            {categoryName}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
+const Categories: React.FC<ICategoriesProps> = React.memo(
+  ({ valueId, onChangeCategory }) => {
+    useWhyDidYouUpdate("Categories", { valueId, onChangeCategory });
+
+    return (
+      <div className="categories">
+        <ul>
+          {categories.map((categoryName, categoryIndex) => (
+            <li
+              key={categoryIndex}
+              onClick={() => onChangeCategory(categoryIndex)}
+              className={valueId === categoryIndex ? "active" : ""}
+            >
+              {categoryName}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+);
 
 export default Categories;

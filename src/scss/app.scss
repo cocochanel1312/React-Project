@@ -213,11 +213,11 @@ body {
           }
         }
 
-        &--disabled {
+        &:disabled {
           opacity: 0.3; // прозрачность
           border-color: #787878; // цвет окружности
 
-          &:active { 
+          &:active {
             transform: none; // при disabled кнопка не динамичная
           }
 

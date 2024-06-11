@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import { useSelector } from "react-redux";
 import QueryString from "qs";
 import { useNavigate } from "react-router-dom";
+
 
 import Categories from "../components/Categories";
 import Sort, { sortList } from "../components/Sort";
@@ -40,9 +41,9 @@ const Home: React.FC = () => {
   const pizzaItems = useSelector(pizzaItemsSelector);
   const pizzaStatus = useSelector(pizzaStatusSelector);
 
-  const onChangeCategory = (id: number) => {
+  const onChangeCategory = useCallback((id: number) => {
     dispatch(setCategoryId(id));
-  };
+  }, [])
 
   const onChangePage = (selectedPageNumber: number) => {
     dispatch(setCurrentPage(selectedPageNumber));
