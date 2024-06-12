@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import logoSvg from "../assets/img/pizza-logo.svg";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { MdFavorite } from "react-icons/md";
 
 import Search from "./Search";
 import { cartSelector } from "../redux/slices/cartSlice";
@@ -38,10 +39,15 @@ const Header: React.FC = () => {
         </Link>
         {location.pathname !== "/cart" && <Search />}
         <div className="header__cart">
+          <Link to="/favorites" className="button button--favorites">
+            <span>10</span>
+            <MdFavorite />
+          </Link>
           {location.pathname !== "/cart" && (
             <Link to="/cart" className="button button--cart">
+              <div className="button__delimiter1"></div>
               <span>{totalPrice} ₽</span>
-              <div className="button__delimiter"></div>
+              <div className="button__delimiter2"></div>
               <svg
                 width="18"
                 height="18"

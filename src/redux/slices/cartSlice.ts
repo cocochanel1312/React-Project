@@ -18,11 +18,11 @@ interface InitialStateCartSlice {
   items: ICartItem[];
 }
 
-const cartData = getCartFromLocalStorage();
+const { items, totalPrice } = getCartFromLocalStorage();
 
 const initialState: InitialStateCartSlice = {
-  totalPrice: cartData.totalPrice,
-  items: cartData.items,
+  totalPrice,
+  items,
 };
 
 const cartSlice = createSlice({

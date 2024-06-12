@@ -67,3 +67,29 @@
     letter-spacing: 0.015em;
   }
 }
+
+.button__favorites {
+  height: 32px;
+  width: 32px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  color: red;
+  background-color: white;
+
+  &:hover {
+    background-color: darken($color: #f3b5b5, $amount: 0.1%);
+  }
+}
+
+// &:hover {
+//   background-color: darken(#f9f9f9, 2%);
+// }
+
+// &:active {
+//   background-color: darken(#f9f9f9, 5%);
+// }
+
+// &.active {
+//   background-color: #282828;
+//   color: #fff;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { MdFavorite } from "react-icons/md";
 
 import {
   addItem,
@@ -85,6 +86,9 @@ const PizzaBlock: React.FC<IPizzaBlockProps> = ({
         </div>
         <div className="pizza-block__bottom">
           <div className="pizza-block__price">от {price} ₽</div>
+          <button className="button__favorites">
+            <MdFavorite className="logoFavorite" />
+          </button>
           <button
             onClick={onClickAdd}
             className="button button--outline button--add"

@@ -1,4 +1,4 @@
-@import '../variables';
+@import "../variables";
 
 .button {
   display: inline-block;
@@ -8,7 +8,8 @@
   min-width: 100px;
   text-align: center;
   cursor: pointer;
-  transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
+  transition: background-color $duration ease-in-out,
+    border-color $duration ease-in-out;
   border: 1px solid transparent;
   @include noselect();
 
@@ -87,7 +88,15 @@
     }
   }
 
-  &__delimiter {
+  &__delimiter1 {
+    width: 1px;
+    height: 25px;
+    background-color: rgba(255, 255, 255, 0.25);
+    margin-left: -14px;
+    margin-right: 14px;
+  }
+
+  &__delimiter2 {
     width: 1px;
     height: 25px;
     background-color: rgba(255, 255, 255, 0.25);
