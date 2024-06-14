@@ -8,6 +8,11 @@ import {
   ICartItem,
 } from "../../redux/slices/cartSlice";
 
+import {
+  addFavoritesItem,
+  isItemInFavoritesSelector,
+} from "../../redux/slices/favoritesSlice";
+
 interface IPizzaBlockProps {
   id: string;
   title: string;
@@ -31,6 +36,7 @@ const PizzaBlock: React.FC<IPizzaBlockProps> = ({
   const [activeTypeName, setActiveTypeName] = useState<number>(0);
   const dispatch = useDispatch();
   const cartItem = useSelector(cartItemByIdSelector(id));
+  const isFavoriteButtonActive = useSelector(isItemInFavoritesSelector(id));
 
   const addedCount = cartItem ? cartItem.count : 0;
 
@@ -53,6 +59,17 @@ const PizzaBlock: React.FC<IPizzaBlockProps> = ({
       count: 0,
     };
     dispatch(addItem(item));
+  };
+
+  const onClickAddFavorites = () => {
+    const favoritesItem = {
+      id,
+      title,
+      price,
+      imageUrl,
+    };
+
+    dispatch(addFavoritesItem(favoritesItem));
   };
 
   return (
@@ -86,7 +103,14 @@ const PizzaBlock: React.FC<IPizzaBlockProps> = ({
         </div>
         <div className="pizza-block__bottom">
           <div className="pizza-block__price">от {price} ₽</div>
-          <button className="button__favorites">
+          <button
+            onClick={onClickAddFavorites}
+            className={
+              isFavoriteButtonActive
+                ? "button__favorites-active"
+                : "button__favorites-inActive"
+            }
+          >
             <MdFavorite className="logoFavorite" />
           </button>
           <button

@@ -6,9 +6,11 @@ import { MdFavorite } from "react-icons/md";
 
 import Search from "./Search";
 import { cartSelector } from "../redux/slices/cartSlice";
+import { favoritesCountSelector } from "../redux/slices/favoritesSlice";
 
 const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(cartSelector);
+  const favoritesCount = useSelector(favoritesCountSelector);
   const location = useLocation();
   const isMounted = useRef(false);
 
@@ -25,6 +27,7 @@ const Header: React.FC = () => {
     isMounted.current = true;
   }, [items]);
 
+  console.log(favoritesCount);
   return (
     <div className="header">
       <div className="container">
@@ -37,13 +40,15 @@ const Header: React.FC = () => {
             </div>
           </div>
         </Link>
-        {location.pathname !== "/cart" && <Search />}
+        {location.pathname === "/" && <Search />}
         <div className="header__cart">
-          <Link to="/favorites" className="button button--favorites">
-            <span>10</span>
-            <MdFavorite />
-          </Link>
-          {location.pathname !== "/cart" && (
+          {location.pathname === "/" && (
+            <Link to="/favorites" className="button button--favorites">
+              <span>{favoritesCount}</span>
+              <MdFavorite />
+            </Link>
+          )}
+          {location.pathname === "/" && (
             <Link to="/cart" className="button button--cart">
               <div className="button__delimiter1"></div>
               <span>{totalPrice} ₽</span>

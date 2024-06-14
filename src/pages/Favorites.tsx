@@ -1,7 +1,25 @@
 import React from "react";
 import { FaHeart } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  clearFavoritesItem,
+  favoritesSelector,
+  favoritesCountSelector,
+} from "../redux/slices/favoritesSlice";
+import FavoritesItem from "../components/FavoritesItem";
 
 const Favorites: React.FC = () => {
+  const dispatch = useDispatch();
+  const { favoritesItems } = useSelector(favoritesSelector);
+  const favoritesCount = useSelector(favoritesCountSelector);
+
+  const onClickClearItems = () => {
+    if (window.confirm("Вы действительно хотите очистить корзину?"))
+      dispatch(clearFavoritesItem());
+  };
+
   return (
     <div className="container container--cart">
       <div className="cart">
@@ -10,7 +28,7 @@ const Favorites: React.FC = () => {
             <FaHeart />
             Избранное
           </h2>
-          <div className="cart__clear">
+          <div onClick={onClickClearItems} className="cart__clear">
             <svg
               width="20"
               height="20"
@@ -52,19 +70,22 @@ const Favorites: React.FC = () => {
           </div>
         </div>
         <div className="content__items">
-          {/* {items.map((item) => (
-            <CartItem key={item.id} {...item} />
-          ))} */}
+          {favoritesItems.map((item) => (
+            <FavoritesItem key={item.id} {...item} />
+          ))}
         </div>
         <div className="cart__bottom">
           <div className="cart__bottom-details">
             <span>
               {" "}
-              Всего избранных пицц: <b>1222</b>{" "}
+              Всего избранных пицц: <b>{favoritesCount}</b>{" "}
             </span>
           </div>
           <div className="cart__bottom-buttons">
-            <div className="button button--outline button--add go-back-btn">
+            <Link
+              to="/"
+              className="button button--outline button--add go-back-btn"
+            >
               <svg
                 width="8"
                 height="14"
@@ -81,10 +102,10 @@ const Favorites: React.FC = () => {
                 ></path>
               </svg>
               <span>Вернуться назад</span>
-            </div>
-            <div className="button pay-btn">
+            </Link>
+            <Link to="/cart" className="button pay-btn">
               <span>Сделать заказ избранного</span>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

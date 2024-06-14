@@ -68,7 +68,7 @@
   }
 }
 
-.button__favorites {
+.button__favorites-active {
   height: 32px;
   width: 32px;
   border-radius: 30px;
@@ -82,14 +82,7 @@
   }
 }
 
-// &:hover {
-//   background-color: darken(#f9f9f9, 2%);
-// }
-
-// &:active {
-//   background-color: darken(#f9f9f9, 5%);
-// }
-
-// &.active {
-//   background-color: #282828;
-//   color: #fff;
+.button__favorites-inActive {
+  @extend .button__favorites-active;
+  color: gray;
+}
